@@ -35,7 +35,9 @@ body {
 }
 
 .VPNavBar .title {
-  font-weight: 760;
+  color: #111827;
+  font-size: 16px;
+  font-weight: 780;
   letter-spacing: 0;
 }
 
@@ -43,44 +45,99 @@ body {
   width: var(--vp-sidebar-width);
   border-right: 1px solid var(--portfolio-line);
   background: #ffffff;
-  padding-top: 24px !important;
+  padding: 22px 14px 24px !important;
 }
 
 .VPSidebar::before {
   display: block;
-  width: 84px;
-  height: 84px;
-  margin: 16px auto 14px;
+  width: 58px;
+  height: 58px;
+  margin: 8px auto 22px;
   border: 1px solid #cfe5e7;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #eefafa 0%, #dfeff5 100%);
-  box-shadow: 0 12px 28px rgba(15, 118, 110, 0.1);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f3fbfb 0%, #e7f1f6 100%);
+  box-shadow: 0 10px 24px rgba(15, 118, 110, 0.08);
   color: #0f766e;
-  content: "CJ";
-  font-size: 27px;
+  content: "Web";
+  font-size: 15px;
   font-weight: 820;
-  line-height: 84px;
+  line-height: 58px;
   text-align: center;
 }
 
 .VPSidebar::after {
-  display: block;
-  margin: -2px 28px 24px;
-  color: var(--portfolio-muted);
-  content: "程嘉骏\A AI应用开发 / 计算机视觉";
-  font-size: 13px;
-  line-height: 1.7;
-  text-align: center;
-  white-space: pre;
+  display: none;
+  content: "";
+}
+
+.VPSidebarItem.level-0 {
+  padding-bottom: 4px;
+}
+
+.VPSidebarItem.level-0 > .item {
+  min-height: 38px;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+
+.VPSidebarItem.level-0 > .item:hover {
+  background: #f4f8fa;
 }
 
 .VPSidebarItem.level-0 .text {
-  font-size: 15px;
-  font-weight: 680;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 640;
+  line-height: 38px;
+}
+
+.VPSidebarItem.is-active > .item {
+  background: #edf8f7;
+  box-shadow: inset 3px 0 0 #0f766e;
 }
 
 .VPSidebarItem.is-active > .item .link > .text {
   color: var(--vp-c-brand-1);
+  font-weight: 760;
+}
+
+.VPSidebarItem.level-1 .item {
+  min-height: 30px;
+  border-radius: 7px;
+  padding-left: 18px;
+}
+
+.VPSidebarItem.level-1 .text {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 560;
+  line-height: 30px;
+}
+
+.VPSidebarItem.level-1.is-active > .item .text {
+  color: #0f766e;
+  font-weight: 700;
+}
+
+.VPSidebarItem.collapsed:hover > .items,
+.VPSidebarItem.collapsed:focus-within > .items {
+  display: block !important;
+}
+
+.VPSidebarItem.collapsible > .items {
+  padding-left: 6px;
+}
+
+.VPDocAside {
+  display: none !important;
+}
+
+.VPDoc .aside {
+  display: none !important;
+}
+
+.VPDoc.has-aside .content {
+  max-width: none;
 }
 
 .VPDoc.has-aside .content-container,
@@ -525,3 +582,4 @@ body {
     padding: 12px;
   }
 }
+
