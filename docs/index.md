@@ -18,8 +18,8 @@ description: 程嘉骏的个人主页
     <span>软件 / 硬件工程</span>
   </div>
   <div class="action-row">
-    <a class="button primary" href="/my_web/projects/">查看项目</a>
-    <a class="button" href="/my_web/resume">查看简历</a>
+    <a class="button primary" href="projects/">查看项目</a>
+    <a class="button" href="resume.html">查看简历</a>
     <a class="button ghost" href="https://github.com/0110none" target="_blank" rel="noreferrer">访问GitHub</a>
   </div>
 </section>
@@ -27,17 +27,17 @@ description: 程嘉骏的个人主页
 ## 主页概览
 
 <div class="feature-grid">
-  <a class="feature-card" href="/my_web/projects/">
+  <a class="feature-card" href="projects/">
     <span class="card-kicker">Projects</span>
     <h3>项目展示</h3>
     <p>整理人脸识别系统、AI招聘顾问Agent和竞赛项目经历，突出实践过程和真实职责。</p>
   </a>
-  <a class="feature-card" href="/my_web/skills">
+  <a class="feature-card" href="skills.html">
     <span class="card-kicker">Skills</span>
     <h3>技术栈</h3>
     <p>按编程语言、AI视觉、Agent、数据库和开发工具分类展示目前掌握的技术。</p>
   </a>
-  <a class="feature-card" href="/my_web/blog/">
+  <a class="feature-card" href="blog/">
     <span class="card-kicker">Blog</span>
     <h3>技术博客</h3>
     <p>后续记录毕业设计开发、InsightFace实践、AI辅助开发和个人作品集建设经验。</p>

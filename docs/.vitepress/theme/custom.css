@@ -89,6 +89,11 @@ video {
   white-space: nowrap;
 }
 
+.VPNavBarMenuLink.vp-external-link-icon::after,
+.VPSidebar .vp-external-link-icon::after {
+  display: none;
+}
+
 .VPSidebar::before {
   display: block;
   width: 58px;

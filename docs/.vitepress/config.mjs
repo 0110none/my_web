@@ -1,11 +1,20 @@
 import { defineConfig } from 'vitepress'
 
+const site = 'https://0110none.github.io/my_web'
+const page = (text, path, extra = {}) => ({
+  text,
+  link: `${site}${path}`,
+  target: '_self',
+  rel: '',
+  ...extra
+})
+
 export default defineConfig({
   title: 'Web',
   description: '程嘉骏的个人主页、项目展示与技术博客入口',
   lang: 'zh-CN',
   base: '/my_web/',
-  cleanUrls: true,
+  cleanUrls: false,
   appearance: false,
   head: [
     ['meta', { name: 'theme-color', content: '#0f766e' }]
@@ -16,54 +25,46 @@ export default defineConfig({
       provider: 'local'
     },
     nav: [
-      { text: '首页', link: '/my_web/' },
-      { text: '项目展示', link: '/my_web/projects/' },
-      { text: '技术博客', link: '/my_web/blog/' },
-      { text: '在线简历', link: '/my_web/resume' }
+      page('首页', '/'),
+      page('项目展示', '/projects/'),
+      page('技术博客', '/blog/'),
+      page('在线简历', '/resume.html')
     ],
     sidebar: [
       {
         text: '导航',
         items: [
-          { text: '首页', link: '/my_web/' },
-          {
-            text: '关于我',
-            link: '/my_web/about',
+          page('首页', '/'),
+          page('关于我', '/about.html', {
             collapsed: true,
             items: [
-              { text: '学习经历', link: '/my_web/about#学习经历' },
-              { text: '实践方向', link: '/my_web/about#实践方向' }
+              page('学习经历', '/about.html#学习经历'),
+              page('实践方向', '/about.html#实践方向')
             ]
-          },
-          {
-            text: '项目展示',
-            link: '/my_web/projects/',
+          }),
+          page('项目展示', '/projects/', {
             collapsed: true,
             items: [
-              { text: '单摄像头人脸识别系统', link: '/my_web/projects/#单摄像头人脸识别系统' },
-              { text: '多摄像头人脸跟踪系统', link: '/my_web/projects/#多摄像头人脸跟踪系统' },
-              { text: 'AI招聘顾问Agent系统', link: '/my_web/projects/#ai招聘顾问agent系统' },
-              { text: '电子商务技术项目比赛', link: '/my_web/projects/#电子商务技术项目比赛' }
+              page('单摄像头人脸识别系统', '/projects/#单摄像头人脸识别系统'),
+              page('多摄像头人脸跟踪系统', '/projects/#多摄像头人脸跟踪系统'),
+              page('AI招聘顾问Agent系统', '/projects/#ai招聘顾问agent系统'),
+              page('电子商务技术项目比赛', '/projects/#电子商务技术项目比赛')
             ]
-          },
-          {
-            text: '技术栈',
-            link: '/my_web/skills',
+          }),
+          page('技术栈', '/skills.html', {
             collapsed: true,
             items: [
-              { text: '能力侧重点', link: '/my_web/skills#能力侧重点' }
+              page('能力侧重点', '/skills.html#能力侧重点')
             ]
-          },
-          {
-            text: '技术博客',
-            link: '/my_web/blog/',
+          }),
+          page('技术博客', '/blog/', {
             collapsed: true,
             items: [
-              { text: '文章入口', link: '/my_web/blog/#技术博客' }
+              page('文章入口', '/blog/#技术博客')
             ]
-          },
-          { text: '在线简历', link: '/my_web/resume' },
-          { text: '联系方式', link: '/my_web/contact' }
+          }),
+          page('在线简历', '/resume.html'),
+          page('联系方式', '/contact.html')
         ]
       }
     ],
@@ -74,6 +75,10 @@ export default defineConfig({
     footer: {
       message: '持续整理项目与学习记录',
       copyright: '© 2026 程嘉骏'
+    },
+    docFooter: {
+      prev: false,
+      next: false
     }
   }
 })
