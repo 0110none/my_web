@@ -18,7 +18,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '项目展示', link: '/projects/' },
       { text: '技术博客', link: '/blog/' },
-      { text: '简历下载', link: '/resume' }
+      { text: '在线简历', link: '/resume' }
     ],
     sidebar: [
       { text: '首页', link: '/' },
@@ -27,7 +27,7 @@ export default defineConfig({
       { text: '技术栈', link: '/skills' },
       { text: '学习经历', link: '/about#学习经历' },
       { text: '技术博客', link: '/blog/' },
-      { text: '简历下载', link: '/resume' },
+      { text: '在线简历', link: '/resume' },
       { text: '联系方式', link: '/contact' }
     ],
     outline: {

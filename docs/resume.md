@@ -1,13 +1,16 @@
 ---
-title: 简历下载
-description: 下载程嘉骏的PDF简历
+title: 在线简历
+description: 程嘉骏的在线PDF简历预览
 ---
 
-# 简历下载
+# 在线简历
 
-<section class="download-panel">
-  <span class="card-kicker">PDF Resume</span>
-  <h2>程嘉骏 - 人工智能专业应届毕业生</h2>
-  <p>可以通过下方按钮下载PDF简历。后续如果简历内容更新，只需要替换 `docs/public/resume.pdf` 文件。</p>
-  <a class="button primary" href="/resume.pdf" download>下载PDF简历</a>
+<p class="page-lead">
+  以下为PDF简历的在线图片预览，方便在网页中直接查看。页面不提供下载入口，后续更新简历时可重新渲染替换图片。
+</p>
+
+<section class="resume-viewer" aria-label="程嘉骏PDF简历预览">
+  <figure class="resume-page">
+    <img src="/resume-pages/page-1.png" alt="程嘉骏个人简历第一页" loading="eager" />
+  </figure>
 </section>

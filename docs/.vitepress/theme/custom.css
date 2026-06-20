@@ -1,16 +1,19 @@
 :root {
   --vp-c-brand-1: #0f766e;
   --vp-c-brand-2: #0891b2;
-  --vp-c-brand-3: #d7f3f0;
-  --vp-c-bg: #f6f8fb;
+  --vp-c-brand-3: #d8f3f1;
+  --vp-c-bg: #f7f9fc;
   --vp-c-bg-alt: #eef3f7;
-  --vp-c-text-1: #172033;
-  --vp-c-text-2: #4b5b70;
-  --vp-c-border: #dce5ec;
+  --vp-c-text-1: #111827;
+  --vp-c-text-2: #4b5563;
+  --vp-c-border: #dde6ee;
   --vp-sidebar-width: 260px;
   --portfolio-card: #ffffff;
+  --portfolio-soft: #f1f7f8;
   --portfolio-muted: #64748b;
-  --portfolio-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  --portfolio-line: #dbe7ee;
+  --portfolio-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+  --portfolio-shadow-hover: 0 16px 34px rgba(15, 23, 42, 0.09);
 }
 
 html {
@@ -18,43 +21,45 @@ html {
 }
 
 body {
-  background: var(--vp-c-bg);
+  background:
+    linear-gradient(180deg, #ffffff 0, #f7f9fc 320px),
+    var(--vp-c-bg);
   color: var(--vp-c-text-1);
+  text-rendering: optimizeLegibility;
 }
 
 .VPNav {
-  border-bottom: 1px solid var(--vp-c-border);
-  background: rgba(246, 248, 251, 0.9);
-  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(221, 230, 238, 0.86);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px);
 }
 
 .VPNavBar .title {
-  font-weight: 700;
+  font-weight: 760;
+  letter-spacing: 0;
 }
 
 .VPSidebar {
   width: var(--vp-sidebar-width);
-  border-right: 1px solid var(--vp-c-border);
+  border-right: 1px solid var(--portfolio-line);
   background: #ffffff;
   padding-top: 24px !important;
 }
 
 .VPSidebar::before {
   display: block;
-  width: 88px;
-  height: 88px;
-  margin: 14px auto 14px;
+  width: 84px;
+  height: 84px;
+  margin: 16px auto 14px;
+  border: 1px solid #cfe5e7;
   border-radius: 50%;
-  background:
-    linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(8, 145, 178, 0.22)),
-    #eef7f8;
-  border: 1px solid #c9e7e8;
-  box-shadow: 0 10px 26px rgba(15, 118, 110, 0.12);
-  content: "CJ";
+  background: linear-gradient(135deg, #eefafa 0%, #dfeff5 100%);
+  box-shadow: 0 12px 28px rgba(15, 118, 110, 0.1);
   color: #0f766e;
-  font-size: 28px;
-  font-weight: 800;
-  line-height: 88px;
+  content: "CJ";
+  font-size: 27px;
+  font-weight: 820;
+  line-height: 84px;
   text-align: center;
 }
 
@@ -71,7 +76,7 @@ body {
 
 .VPSidebarItem.level-0 .text {
   font-size: 15px;
-  font-weight: 650;
+  font-weight: 680;
 }
 
 .VPSidebarItem.is-active > .item .link > .text {
@@ -84,33 +89,41 @@ body {
 }
 
 .VPDoc .container {
-  padding-top: 36px;
+  padding-top: 38px;
 }
 
 .vp-doc h1 {
-  color: #102033;
-  font-size: 36px;
+  color: #101828;
+  font-size: 38px;
+  font-weight: 800;
   letter-spacing: 0;
+  line-height: 1.18;
 }
 
 .vp-doc h2 {
-  margin-top: 44px;
+  margin-top: 46px;
   border-top: 0;
   padding-top: 0;
-  color: #102033;
+  color: #101828;
   font-size: 24px;
+  font-weight: 760;
   letter-spacing: 0;
 }
 
 .vp-doc h3 {
-  color: #1c2d42;
+  color: #1f2937;
+  font-weight: 720;
   letter-spacing: 0;
 }
 
 .vp-doc p,
 .vp-doc li {
   color: var(--vp-c-text-2);
-  line-height: 1.85;
+  line-height: 1.82;
+}
+
+.vp-doc a {
+  text-underline-offset: 3px;
 }
 
 .hero-panel,
@@ -118,18 +131,21 @@ body {
 .project-card,
 .skill-card,
 .blog-card,
-.download-panel,
 .contact-card,
 .feature-card,
-.timeline-item {
-  border: 1px solid rgba(210, 222, 232, 0.9);
+.timeline-item,
+.resume-viewer {
+  border: 1px solid rgba(221, 230, 238, 0.96);
   border-radius: 8px;
   background: var(--portfolio-card);
   box-shadow: var(--portfolio-shadow);
 }
 
 .hero-panel {
-  padding: 44px;
+  padding: 48px;
+  background:
+    linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(8, 145, 178, 0.03) 42%, transparent 68%),
+    #ffffff;
 }
 
 .eyebrow,
@@ -138,20 +154,21 @@ body {
   margin: 0 0 10px;
   color: var(--vp-c-brand-1);
   font-size: 13px;
-  font-weight: 750;
+  font-weight: 760;
+  letter-spacing: 0;
 }
 
 .hero-panel h1 {
   margin: 0;
-  font-size: 48px;
-  line-height: 1.1;
+  font-size: 52px;
+  line-height: 1.08;
 }
 
 .role {
   margin: 12px 0 0;
   color: #334155 !important;
   font-size: 20px;
-  font-weight: 650;
+  font-weight: 680;
 }
 
 .lead,
@@ -175,14 +192,14 @@ body {
 
 .tag-row span,
 .skill-tags span {
-  border: 1px solid #cce4e8;
+  border: 1px solid #cbe3e6;
   border-radius: 999px;
-  background: #effafa;
+  background: #f0faf9;
   color: #0f766e;
   font-size: 13px;
-  font-weight: 650;
+  font-weight: 680;
   line-height: 1;
-  padding: 9px 12px;
+  padding: 8px 12px;
 }
 
 .tag-row.compact {
@@ -194,19 +211,19 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 42px;
-  border: 1px solid #bfd3df;
+  border: 1px solid #c6d5df;
   border-radius: 8px;
   background: #ffffff;
-  color: #223044 !important;
-  font-weight: 700;
+  color: #1f2937 !important;
+  font-weight: 720;
   padding: 0 18px;
   text-decoration: none !important;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
 .button:hover {
   border-color: #0f766e;
-  box-shadow: 0 10px 22px rgba(15, 118, 110, 0.12);
+  box-shadow: 0 10px 24px rgba(15, 118, 110, 0.12);
   transform: translateY(-1px);
 }
 
@@ -248,6 +265,17 @@ body {
   padding: 24px;
   color: inherit !important;
   text-decoration: none !important;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.feature-card:hover,
+.blog-card:hover,
+.contact-card:hover,
+.project-card:hover,
+.skill-card:hover {
+  border-color: #bdd9df;
+  box-shadow: var(--portfolio-shadow-hover);
+  transform: translateY(-1px);
 }
 
 .feature-card h3,
@@ -273,8 +301,7 @@ body {
 }
 
 .about-card,
-.timeline-item,
-.download-panel {
+.timeline-item {
   padding: 28px;
 }
 
@@ -289,7 +316,7 @@ body {
   background: #e8f6f5;
   color: #0f766e;
   font-size: 13px;
-  font-weight: 750;
+  font-weight: 760;
   padding: 8px 12px;
 }
 
@@ -300,6 +327,7 @@ body {
 
 .project-card {
   padding: 28px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
 .project-head {
@@ -321,6 +349,7 @@ body {
 
 .note {
   border-left: 3px solid #0891b2;
+  border-radius: 0 8px 8px 0;
   background: #f0f9fb;
   padding: 12px 14px;
 }
@@ -331,6 +360,7 @@ body {
 
 .skill-card {
   padding: 24px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
 .skill-card h2 {
@@ -344,7 +374,7 @@ body {
 }
 
 .meter-item {
-  border: 1px solid var(--vp-c-border);
+  border: 1px solid var(--portfolio-line);
   border-radius: 8px;
   background: #ffffff;
   padding: 16px;
@@ -354,7 +384,7 @@ body {
   display: block;
   margin-bottom: 10px;
   color: #334155;
-  font-weight: 700;
+  font-weight: 720;
 }
 
 .meter-item b {
@@ -370,7 +400,7 @@ body {
 
 .blog-card span {
   color: #0f766e;
-  font-weight: 800;
+  font-weight: 820;
 }
 
 .blog-card h2 {
@@ -395,6 +425,28 @@ body {
   word-break: break-word;
 }
 
+.resume-viewer {
+  margin-top: 24px;
+  padding: 28px;
+  background:
+    linear-gradient(180deg, #ffffff, #f8fafc);
+}
+
+.resume-page {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.resume-page img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #d7e1ea;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 18px 46px rgba(15, 23, 42, 0.12);
+}
+
 @media (min-width: 960px) {
   .VPContent.has-sidebar {
     padding-left: var(--vp-sidebar-width);
@@ -416,11 +468,11 @@ body {
   }
 
   .hero-panel {
-    padding: 30px 22px;
+    padding: 32px 24px;
   }
 
   .hero-panel h1 {
-    font-size: 38px;
+    font-size: 40px;
   }
 
   .role {
@@ -460,11 +512,16 @@ body {
   .project-card,
   .about-card,
   .timeline-item,
-  .download-panel,
   .feature-card,
   .blog-card,
   .contact-card,
   .skill-card {
     padding: 20px;
+  }
+
+  .resume-viewer {
+    margin-right: -4px;
+    margin-left: -4px;
+    padding: 12px;
   }
 }

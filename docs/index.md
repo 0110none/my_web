@@ -19,7 +19,7 @@ description: 程嘉骏的个人主页
   </div>
   <div class="action-row">
     <a class="button primary" href="/projects/">查看项目</a>
-    <a class="button" href="/resume.pdf" download>下载简历</a>
+    <a class="button" href="/resume">查看简历</a>
     <a class="button ghost" href="https://github.com/0110none" target="_blank" rel="noreferrer">访问GitHub</a>
   </div>
 </section>
