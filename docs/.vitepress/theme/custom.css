@@ -16,6 +16,12 @@
   --portfolio-shadow-hover: 0 16px 34px rgba(15, 23, 42, 0.09);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -26,6 +32,12 @@ body {
     var(--vp-c-bg);
   color: var(--vp-c-text-1);
   text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
 }
 
 .VPNav {
@@ -186,10 +198,15 @@ body {
 .VPDoc.has-aside .content-container,
 .VPDoc:not(.has-aside) .content-container {
   max-width: 1040px;
+  width: 100%;
 }
 
 .VPDoc .container {
   padding-top: 38px;
+}
+
+.vp-doc {
+  overflow-wrap: anywhere;
 }
 
 .vp-doc h1 {
@@ -246,6 +263,19 @@ body {
   background:
     linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(8, 145, 178, 0.03) 42%, transparent 68%),
     #ffffff;
+}
+
+.hero-panel,
+.project-card,
+.about-card,
+.timeline-item,
+.download-panel,
+.feature-card,
+.blog-card,
+.contact-card,
+.skill-card,
+.resume-viewer {
+  width: 100%;
 }
 
 .eyebrow,
@@ -351,11 +381,11 @@ body {
 }
 
 .feature-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .feature-grid.two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .feature-card,
@@ -455,7 +485,7 @@ body {
 }
 
 .skill-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .skill-card {
@@ -495,7 +525,7 @@ body {
 }
 
 .blog-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .blog-card span {
@@ -509,7 +539,7 @@ body {
 }
 
 .contact-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .contact-card span {
@@ -557,7 +587,28 @@ body {
   }
 }
 
+@media (min-width: 1280px) {
+  .VPDoc.has-aside .content-container,
+  .VPDoc:not(.has-aside) .content-container {
+    max-width: 1120px;
+  }
+
+  .VPDoc .container {
+    padding-right: 56px;
+    padding-left: 56px;
+  }
+}
+
 @media (max-width: 959px) {
+  :root {
+    --vp-sidebar-width: 300px;
+  }
+
+  .VPSidebar {
+    width: min(86vw, var(--vp-sidebar-width));
+    padding: 20px 18px 24px !important;
+  }
+
   .VPSidebar::before,
   .VPSidebar::after {
     display: none;
@@ -565,6 +616,8 @@ body {
 
   .VPDoc .container {
     padding-top: 24px;
+    padding-right: 28px;
+    padding-left: 28px;
   }
 
   .hero-panel {
@@ -579,30 +632,66 @@ body {
     font-size: 18px;
   }
 
-  .feature-grid,
-  .feature-grid.two,
-  .skill-grid,
-  .blog-grid,
-  .contact-grid {
-    grid-template-columns: 1fr;
+  .lead,
+  .page-lead {
+    font-size: 16px;
   }
 
   .project-head {
-    display: block;
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .project-head .button {
-    margin-top: 10px;
+    align-self: flex-start;
+    margin-top: 0;
+  }
+
+  .resume-viewer {
+    padding: 20px;
+  }
+
+  .resume-page {
+    max-width: 760px;
   }
 }
 
 @media (max-width: 520px) {
+  .VPDoc .container {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
   .vp-doc h1 {
     font-size: 30px;
   }
 
+  .vp-doc h2 {
+    margin-top: 34px;
+    font-size: 22px;
+  }
+
   .hero-panel h1 {
     font-size: 34px;
+  }
+
+  .hero-panel {
+    padding: 24px 18px;
+  }
+
+  .role {
+    font-size: 16px;
+  }
+
+  .lead,
+  .page-lead {
+    font-size: 15px;
+  }
+
+  .tag-row,
+  .skill-tags,
+  .action-row {
+    gap: 8px;
   }
 
   .button {
@@ -620,9 +709,35 @@ body {
   }
 
   .resume-viewer {
-    margin-right: -4px;
-    margin-left: -4px;
-    padding: 12px;
+    margin-right: -8px;
+    margin-left: -8px;
+    padding: 8px;
+  }
+
+  .resume-page img {
+    border-radius: 6px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+  }
+}
+
+@media (max-width: 380px) {
+  .VPDoc .container {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .hero-panel h1 {
+    font-size: 31px;
+  }
+
+  .project-card,
+  .about-card,
+  .timeline-item,
+  .feature-card,
+  .blog-card,
+  .contact-card,
+  .skill-card {
+    padding: 16px;
   }
 }
 
