@@ -7,7 +7,7 @@
   --vp-c-text-1: #111827;
   --vp-c-text-2: #4b5563;
   --vp-c-border: #dde6ee;
-  --vp-sidebar-width: 260px;
+  --vp-sidebar-width: 300px;
   --portfolio-card: #ffffff;
   --portfolio-soft: #f1f7f8;
   --portfolio-muted: #64748b;
@@ -50,6 +50,31 @@ body {
 
 .VPSidebar .nav {
   padding: 0;
+}
+
+.VPSidebarItem .item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.VPSidebarItem .link {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.VPSidebarItem .caret {
+  flex: 0 0 auto;
+  margin-left: 12px;
+}
+
+.VPSidebarItem .text {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .VPSidebar::before {
