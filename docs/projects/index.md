@@ -75,39 +75,6 @@ description: 程嘉骏的项目作品集
   <article class="project-card">
     <div class="project-head">
       <div>
-        <span class="card-kicker">毕业设计 / 个人项目</span>
-        <h2 id="基于insightface的多源视频流实时人脸识别系统">基于InsightFace的多源视频流实时人脸识别系统</h2>
-      </div>
-      <a class="button small" href="https://github.com/0110none/3.12" target="_blank" rel="noreferrer">GitHub</a>
-    </div>
-    <p>
-      该项目是一个面向多源视频流场景的人脸识别系统，支持本地摄像头、视频文件和RTSP网络视频流接入。
-      系统基于InsightFace实现人脸检测、特征提取和身份识别，并结合PyQt5界面完成多路视频展示、实时告警、截图保存和历史记录查询等功能。
-    </p>
-    <div class="tag-row compact">
-      <span>Python</span>
-      <span>InsightFace</span>
-      <span>PyQt5</span>
-      <span>OpenCV</span>
-      <span>RTSP</span>
-    </div>
-    <h3>核心功能</h3>
-    <ul>
-      <li>支持本地摄像头、视频文件、RTSP网络视频流统一接入</li>
-      <li>基于InsightFace实现人脸检测和身份识别</li>
-      <li>支持多路视频同步显示</li>
-      <li>支持识别结果展示、告警提醒和截图保存</li>
-      <li>支持历史记录查询</li>
-      <li>使用线程池和定时调度机制提升界面响应效率</li>
-    </ul>
-    <p class="note">
-      开发过程中使用AI工具辅助完成部分代码生成、问题排查和功能优化。本人主要负责需求整理、功能设计、模块整合、代码调试、运行测试和最终系统展示。
-    </p>
-  </article>
-
-  <article class="project-card">
-    <div class="project-head">
-      <div>
         <span class="card-kicker">团队项目 / AI Agent实践</span>
         <h2 id="ai招聘顾问agent系统">AI招聘顾问Agent系统</h2>
       </div>

@@ -21,46 +21,50 @@ export default defineConfig({
       { text: '在线简历', link: '/resume' }
     ],
     sidebar: [
-      { text: '首页', link: '/' },
       {
-        text: '关于我',
-        link: '/about',
-        collapsed: true,
+        text: '导航',
         items: [
-          { text: '学习经历', link: '/about#学习经历' },
-          { text: '实践方向', link: '/about#实践方向' }
+          { text: '首页', link: '/' },
+          {
+            text: '关于我',
+            link: '/about',
+            collapsed: true,
+            items: [
+              { text: '学习经历', link: '/about#学习经历' },
+              { text: '实践方向', link: '/about#实践方向' }
+            ]
+          },
+          {
+            text: '项目展示',
+            link: '/projects/',
+            collapsed: true,
+            items: [
+              { text: '单摄像头人脸识别系统', link: '/projects/#单摄像头人脸识别系统' },
+              { text: '多摄像头人脸跟踪系统', link: '/projects/#多摄像头人脸跟踪系统' },
+              { text: 'AI招聘顾问Agent系统', link: '/projects/#ai招聘顾问agent系统' },
+              { text: '电子商务技术项目比赛', link: '/projects/#电子商务技术项目比赛' }
+            ]
+          },
+          {
+            text: '技术栈',
+            link: '/skills',
+            collapsed: true,
+            items: [
+              { text: '能力侧重点', link: '/skills#能力侧重点' }
+            ]
+          },
+          {
+            text: '技术博客',
+            link: '/blog/',
+            collapsed: true,
+            items: [
+              { text: '文章入口', link: '/blog/#技术博客' }
+            ]
+          },
+          { text: '在线简历', link: '/resume' },
+          { text: '联系方式', link: '/contact' }
         ]
-      },
-      {
-        text: '项目展示',
-        link: '/projects/',
-        collapsed: true,
-        items: [
-          { text: '单摄像头人脸识别系统', link: '/projects/#单摄像头人脸识别系统' },
-          { text: '多摄像头人脸跟踪系统', link: '/projects/#多摄像头人脸跟踪系统' },
-          { text: '多源视频流人脸识别系统', link: '/projects/#基于insightface的多源视频流实时人脸识别系统' },
-          { text: 'AI招聘顾问Agent系统', link: '/projects/#ai招聘顾问agent系统' },
-          { text: '电子商务技术项目比赛', link: '/projects/#电子商务技术项目比赛' }
-        ]
-      },
-      {
-        text: '技术栈',
-        link: '/skills',
-        collapsed: true,
-        items: [
-          { text: '能力侧重点', link: '/skills#能力侧重点' }
-        ]
-      },
-      {
-        text: '技术博客',
-        link: '/blog/',
-        collapsed: true,
-        items: [
-          { text: '文章入口', link: '/blog/#技术博客' }
-        ]
-      },
-      { text: '在线简历', link: '/resume' },
-      { text: '联系方式', link: '/contact' }
+      }
     ],
     outline: false,
     socialLinks: [
