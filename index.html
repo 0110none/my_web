@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#faf3ef">
+  <meta name="theme-color" content="#faf6f0">
   <title>给你的一封信 ♡</title>
   <style>
     /* 修改这里的颜色；--speed 越大，开信动画越慢。默认总时长约 2.9 秒。 */
-    :root { --cream: #faf6f0; --pink: #eed1d2; --rose: #b46c79; --ink: #76515a; --speed: 1; }
+    :root { --cream: #faf6f0; --pink: #eed1d2; --rose: #b46c79; --ink: #76515a; --speed: 1; --letter-width: min(520px, calc(100vw - 56px)); --letter-height: 680px; }
     * { box-sizing: border-box; }
     body { margin: 0; min-height: 100svh; color: var(--ink); background: var(--cream); font-family: "Microsoft YaHei", "PingFang SC", sans-serif; }
     button, input { font: inherit; }
@@ -24,6 +24,7 @@
     .eyebrow { color: #b18d94; font: italic 16px Georgia, serif; letter-spacing: .06em; margin: 0 0 19px; }
     h1 { font-family: "STKaiti", "KaiTi", serif; font-size: 34px; font-weight: 400; letter-spacing: .14em; margin: 0 0 14px; }
     .intro { font-size: 12px; letter-spacing: .14em; color: #af9296; margin: 0 0 36px; }
+    .password-hint { margin: 0 0 16px; font-size: 13px; color: #9f7781; }
     .input-wrap { position: relative; }
     input { width: 100%; height: 57px; border: 1px solid #d9b8bf; border-radius: 9px; background: #fffcf9b3; color: var(--ink); outline: none; text-align: center; font-size: 16px; letter-spacing: .14em; box-shadow: 0 5px 18px #97657204; transition: box-shadow .2s, border-color .2s; }
     input::placeholder { color: #b5999e; font-size: 13px; letter-spacing: .12em; }
@@ -35,9 +36,11 @@
     @keyframes shake { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
     .footer { position: absolute; bottom: 43px; width: 100%; text-align: center; color: #b99fa2; font-size: 10px; letter-spacing: .2em; }
     [hidden] { display: none !important; }
-    .letter-screen { flex-direction: column; opacity: 0; transition: opacity .8s ease; }
+    .letter-screen { --scene-top: max(310px, 43svh); flex-direction: column; justify-content: flex-start; padding-top: var(--scene-top); opacity: 0; transition: opacity .8s ease; }
+    /* 展开时为整封长信预留页面高度，手机可自然上下滚动。 */
+    .letter-screen.reading { min-height: max(100svh, calc(var(--scene-top) + var(--letter-height) - 60px)); }
     .letter-screen.visible { opacity: 1; }
-    .scene { position: relative; width: min(330px, 78vw); aspect-ratio: 1.57; margin-top: 105px; perspective: 1100px; }
+    .scene { position: relative; width: min(360px, 78vw); aspect-ratio: 1.57; margin-top: 0; perspective: 1100px; flex-shrink: 0; }
     .envelope { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; filter: drop-shadow(0 18px 19px #95616c1e); }
     .floating { animation: float 3.8s ease-in-out infinite; }
     @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
@@ -49,10 +52,14 @@
     .bottom { z-index: 5; background: linear-gradient(0deg, #efd1d3, #f2dadd); clip-path: polygon(0 100%, 0 98%, 50% 43%, 100% 98%, 100% 100%); border-radius: 0 0 5px 5px; }
     .flap { z-index: 6; height: 59%; transform-origin: center top; background: linear-gradient(180deg, #f5dfe0, #e7bec5); clip-path: polygon(0 0, 100% 0, 50% 100%); backface-visibility: visible; }
     .seal { position: absolute; z-index: 7; top: 48%; left: 50%; transform: translate(-50%, -50%); width: 37px; height: 37px; display: grid; place-items: center; border-radius: 50%; color: #fbebea; background: #c98795; border: 3px double #dda3ad; box-shadow: 0 3px 7px #9c64732b; font: 20px Georgia, serif; transition: opacity .2s; pointer-events: none; }
-    .letter { position: absolute; z-index: 3; left: 7%; top: 8%; width: 86%; height: 84%; background: #fffcf5; border: 1px solid #e7dace; border-radius: 3px; box-shadow: 0 2px 9px #77535512; transform-origin: center center; overflow: hidden; }
+    .letter { position: absolute; z-index: 3; left: 50%; top: 8%; width: 86%; height: 84%; background: #fffcf5; border: 1px solid #e7dace; border-radius: 3px; box-shadow: 0 2px 9px #77535512; transform: translateX(-50%); transform-origin: center top; overflow: hidden; }
     .letter::before { content: ""; position: absolute; inset: 12px; border: 1px solid #bc879423; pointer-events: none; }
-    .message { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: translateY(8px); }
-    .letter-mark { color: #cca2a7; font: italic 12px Georgia, serif; letter-spacing: .1em; margin-bottom: 25px; }
+    .message { position: relative; width: calc(var(--letter-width) - 2px); padding: 34px 34px 38px; opacity: 0; transform: translateY(8px); }
+    .letter-mark { display: block; text-align: center; color: #cca2a7; font: italic 12px Georgia, serif; letter-spacing: .1em; margin-bottom: 26px; }
+    .salutation { font-family: "STKaiti", "KaiTi", serif; font-size: 23px; color: #a65e70; margin: 0 0 22px; }
+    .letter-copy { margin: 0 0 16px; font-size: 15px; line-height: 1.95; letter-spacing: .025em; overflow-wrap: anywhere; }
+    .signature { text-align: center; margin-top: 28px; }
+    .letter:focus { outline: none; }
     .message h2 { font-family: "STKaiti", "KaiTi", "Kaiti SC", serif; font-size: clamp(27px, 6vw, 34px); font-weight: 400; letter-spacing: .12em; margin: 0 0 17px; color: #a65e70; }
     .emoticon { font-size: clamp(15px, 4vw, 20px); white-space: nowrap; margin: 0; color: #a66c7a; }
     .heart { display: inline-block; color: #c97989; }
@@ -64,8 +71,8 @@
     @keyframes flap-open { 0% { transform: rotateX(0deg); z-index: 6; } 49% { z-index: 6; } 50%,100% { z-index: 1; } 100% { transform: rotateX(180deg); } }
     .opening .seal { opacity: 0; }
     .opening .letter { animation: lift calc(.85s * var(--speed)) calc(1.15s * var(--speed)) ease-in-out forwards, unfold calc(.65s * var(--speed)) calc(2s * var(--speed)) ease-in-out forwards; }
-    @keyframes lift { from { transform: translateY(0); } to { transform: translateY(-112%); } }
-    @keyframes unfold { from { transform: translateY(-112%) scale(1); height: 84%; z-index: 7; } to { transform: translateY(-65%) scale(1.04); height: 145%; z-index: 7; } }
+    @keyframes lift { from { transform: translate(-50%, 0); } to { transform: translate(-50%, -112%); } }
+    @keyframes unfold { from { transform: translate(-50%, -112%) scale(1); width: 86%; height: 84%; z-index: 7; } to { transform: translate(-50%, -180px) scale(1.02); width: var(--letter-width); height: var(--letter-height); z-index: 7; } }
     .opening .message { animation: reveal calc(.5s * var(--speed)) calc(2.65s * var(--speed)) ease forwards; }
     @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
     .opened .heart { animation: heartbeat 2.4s ease-in-out infinite; }
@@ -73,8 +80,8 @@
     .petals { position: absolute; inset: 0; pointer-events: none; z-index: -1; overflow: hidden; }
     .petal { position: absolute; bottom: -30px; left: var(--x); color: #d69ca8; font-family: Georgia, serif; font-size: var(--size); opacity: 0; animation: drift var(--duration) var(--delay) linear infinite; }
     @keyframes drift { 0% { opacity: 0; transform: translate(0, 0) rotate(-12deg); } 18%,75% { opacity: .32; } 100% { opacity: 0; transform: translate(25px, -95svh) rotate(18deg); } }
-    @media (max-width: 480px) { .page::before { inset: 13px; } .masthead { top: 36px; } .footer { bottom: 29px; } .login-card { width: 290px; } h1 { font-size: 30px; } }
-    @media (max-height: 620px) and (min-width: 600px) { .masthead { top: 20px; } .masthead span { display: none; } .screen { padding-top: 80px; padding-bottom: 60px; } .scene { width: 270px; margin-top: 100px; } .footer { bottom: 20px; } }
+    @media (max-width: 480px) { .page::before { inset: 13px; } .masthead { top: 36px; } .footer { bottom: 29px; } .login-card { width: 290px; } h1 { font-size: 30px; } .message { padding: 28px 24px 32px; } .letter-copy { font-size: 14px; } }
+    @media (max-height: 620px) and (min-width: 600px) { .masthead { top: 20px; } .masthead span { display: none; } .login { padding-top: 80px; padding-bottom: 60px; } .scene { width: 270px; } .footer { bottom: 20px; } }
     /* 尊重系统的减少动态效果设置，保留简短的开信顺序。 */
     @media (prefers-reduced-motion: reduce) { :root { --speed: .15; } .floating, .opened .heart, .petal { animation: none; } .login, .letter-screen { transition-duration: .15s; } }
   </style>
@@ -87,8 +94,9 @@
         <p class="eyebrow">Just between us</p>
         <h1 id="title">有一封信，想给你</h1>
         <p class="intro">一点点秘密，一整颗真心。</p>
+        <p class="password-hint" id="passwordHint">密码提示：数字 − 你的生日 ♡</p>
         <div class="input-wrap" id="inputWrap">
-          <input id="password" type="password" inputmode="numeric" placeholder="输入密码 ♡" aria-label="输入密码" aria-describedby="error" autocomplete="off">
+          <input id="password" type="password" inputmode="numeric" placeholder="输入密码 ♡" aria-label="输入密码" aria-describedby="passwordHint error" autocomplete="off">
         </div>
         <button class="open-button" type="submit">打开</button>
         <p class="error" id="error" role="status" aria-live="polite"></p>
@@ -102,9 +110,17 @@
             <div class="message">
               <span class="letter-mark" aria-hidden="true">with all my love</span>
               <!-- 在这里修改信纸上的文字。 -->
-              <h2>爱你宝宝</h2>
-              <p class="emoticon">（づ￣3￣）づ╭<span class="heart">❤</span>～</p>
-              <span class="letter-line" aria-hidden="true"></span>
+              <p class="salutation">给可爱的你：</p>
+              <p class="letter-copy">认真说，你真的很好看。</p>
+              <p class="letter-copy">而且不是那种只有第一眼漂亮的感觉，是越看越觉得可爱。</p>
+              <p class="letter-copy">有时候你的表情、说话的样子，还有一些小动作，都挺有意思的。</p>
+              <p class="letter-copy">总之就是想告诉你：</p>
+              <p class="letter-copy">你真的很漂亮，也很可爱。</p>
+              <p class="letter-copy">希望你每天都可以开心一点，自信一点。</p>
+              <div class="signature">
+                <h2>爱你宝宝</h2>
+                <p class="emoticon">（づ￣3￣）づ╭<span class="heart">❤</span>～</p>
+              </div>
             </div>
           </article>
           <div class="fold left"></div><div class="fold right"></div><div class="fold bottom"></div>
@@ -115,11 +131,11 @@
       <p class="hint" id="hint">点击打开 ♡</p>
     </section>
     <div class="petals" id="petals" aria-hidden="true"></div>
-    <footer class="footer">把喜欢，悄悄写进信里。</footer>
+    <footer class="footer">愿你的每一天，都有一点甜。</footer>
   </main>
   <script>
-    // 修改密码：这是纯前端的浪漫小互动，密码会存在页面源码中。
-    const PASSWORD = '1089';
+    // 修改密码：这是纯前端的小互动，密码会存在页面源码中。
+    const PASSWORD = '877';
     const $ = id => document.getElementById(id);
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let stage = 'login';
@@ -162,6 +178,8 @@
       if (stage !== 'envelope') return; // 防止重复点击打断动画。
       stage = 'opening';
       const envelope = $('envelope');
+      sizeLetter();
+      $('letterScreen').classList.add('reading');
       // 固定当前漂浮位置，停止漂浮时不会突然跳动。
       envelope.style.transform = getComputedStyle(envelope).transform;
       envelope.classList.remove('floating');
@@ -172,7 +190,7 @@
 
     // 用动画完成事件衔接内容与装饰，让修改 CSS 速度后仍保持同步。
     $('envelope').addEventListener('animationend', event => {
-      if (event.animationName !== 'reveal') return;
+      if (event.animationName !== 'reveal' || event.target !== document.querySelector('.message') || stage !== 'opening') return;
       stage = 'opened';
       $('envelope').classList.add('opened');
       $('letter').removeAttribute('aria-hidden');
@@ -186,6 +204,15 @@
         heart.style.cssText = `--x:${x}%;--size:${12 + i % 3 * 4}px;--duration:${12 + i % 3 * 2}s;--delay:${i * 1.4}s`;
         $('petals').appendChild(heart);
       });
+    });
+
+    // 按实际文字高度展开；修改内容、旋转手机或调整字号后也不会截断。
+    function sizeLetter() {
+      const height = document.querySelector('.message').offsetHeight + 4;
+      document.documentElement.style.setProperty('--letter-height', `${height}px`);
+    }
+    window.addEventListener('resize', () => {
+      if (stage === 'opened') sizeLetter();
     });
   </script>
 </body>
