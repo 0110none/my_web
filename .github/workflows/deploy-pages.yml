@@ -38,6 +38,12 @@ jobs:
       - name: Build
         run: pnpm docs:build
 
+      # Publish the standalone letter without replacing the existing homepage.
+      - name: Include romantic letter
+        run: |
+          mkdir -p docs/.vitepress/dist/love
+          cp index.html docs/.vitepress/dist/love/index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

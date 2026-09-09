@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf3ef">
+  <title>?????? ?</title>
+  <style>
+    /* ????????--speed ???????????????? 2.9 ?? */
+    :root { --cream: #faf6f0; --pink: #eed1d2; --rose: #b46c79; --ink: #76515a; --speed: 1; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; color: var(--ink); background: var(--cream); font-family: "Microsoft YaHei", "PingFang SC", sans-serif; }
+    button, input { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible { outline: 2px solid var(--rose); outline-offset: 8px; }
+    .page { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; background: radial-gradient(ellipse at 18% 28%, #f4dddd88, transparent 52%), radial-gradient(ellipse at 86% 77%, #f3dfd877, transparent 48%); }
+    .page::before { content: ""; position: absolute; inset: 22px; border: 1px solid #b46c791a; border-radius: 3px; pointer-events: none; }
+    .masthead { position: absolute; top: 49px; left: 0; width: 100%; text-align: center; font-family: Georgia, serif; font-size: 11px; letter-spacing: .32em; color: #aa858c; }
+    .masthead span { display: block; font-size: 19px; margin-bottom: 13px; letter-spacing: 0; }
+    .screen { min-height: 100svh; display: flex; align-items: center; justify-content: center; padding: 140px 28px 100px; }
+    .login { transition: opacity .6s ease, filter .6s ease, transform .6s ease; }
+    .login.leaving { opacity: 0; filter: blur(7px); transform: translateY(-12px); pointer-events: none; }
+    .login-card { text-align: center; width: 320px; max-width: 100%; }
+    .eyebrow { color: #b18d94; font: italic 16px Georgia, serif; letter-spacing: .06em; margin: 0 0 19px; }
+    h1 { font-family: "STKaiti", "KaiTi", serif; font-size: 34px; font-weight: 400; letter-spacing: .14em; margin: 0 0 14px; }
+    .intro { font-size: 12px; letter-spacing: .14em; color: #af9296; margin: 0 0 36px; }
+    .input-wrap { position: relative; }
+    input { width: 100%; height: 57px; border: 1px solid #d9b8bf; border-radius: 9px; background: #fffcf9b3; color: var(--ink); outline: none; text-align: center; font-size: 16px; letter-spacing: .14em; box-shadow: 0 5px 18px #97657204; transition: box-shadow .2s, border-color .2s; }
+    input::placeholder { color: #b5999e; font-size: 13px; letter-spacing: .12em; }
+    input:focus { border-color: var(--rose); box-shadow: 0 0 0 4px #b46c790c; }
+    .open-button { width: 100%; height: 49px; margin-top: 14px; color: #fff9f7; background: var(--rose); border: 0; border-radius: 9px; letter-spacing: .28em; cursor: pointer; box-shadow: 0 7px 20px #b46c791b; transition: background .2s, transform .2s; }
+    .open-button:hover { background: #a7606e; transform: translateY(-2px); }
+    .error { min-height: 22px; margin: 14px 0 0; color: #b46c79; font-size: 12px; }
+    .shake { animation: shake .4s ease-in-out; }
+    @keyframes shake { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+    .footer { position: absolute; bottom: 43px; width: 100%; text-align: center; color: #b99fa2; font-size: 10px; letter-spacing: .2em; }
+    [hidden] { display: none !important; }
+    .letter-screen { flex-direction: column; opacity: 0; transition: opacity .8s ease; }
+    .letter-screen.visible { opacity: 1; }
+    .scene { position: relative; width: min(330px, 78vw); aspect-ratio: 1.57; margin-top: 105px; perspective: 1100px; }
+    .envelope { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; filter: drop-shadow(0 18px 19px #95616c1e); }
+    .floating { animation: float 3.8s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+    .back { position: absolute; inset: 0; border-radius: 5px; background: #d9afb5; box-shadow: inset 0 1px 4px #94627020; }
+    /* ???????????????????????? */
+    .fold { position: absolute; inset: 0; pointer-events: none; }
+    .left { z-index: 4; background: linear-gradient(120deg, #efd3d4, #e5bdc3); clip-path: polygon(0 0, 53% 55%, 0 100%); }
+    .right { z-index: 4; background: linear-gradient(240deg, #eed0d2, #e6bfc5); clip-path: polygon(100% 0, 47% 55%, 100% 100%); }
+    .bottom { z-index: 5; background: linear-gradient(0deg, #efd1d3, #f2dadd); clip-path: polygon(0 100%, 0 98%, 50% 43%, 100% 98%, 100% 100%); border-radius: 0 0 5px 5px; }
+    .flap { z-index: 6; height: 59%; transform-origin: center top; background: linear-gradient(180deg, #f5dfe0, #e7bec5); clip-path: polygon(0 0, 100% 0, 50% 100%); backface-visibility: visible; }
+    .seal { position: absolute; z-index: 7; top: 48%; left: 50%; transform: translate(-50%, -50%); width: 37px; height: 37px; display: grid; place-items: center; border-radius: 50%; color: #fbebea; background: #c98795; border: 3px double #dda3ad; box-shadow: 0 3px 7px #9c64732b; font: 20px Georgia, serif; transition: opacity .2s; pointer-events: none; }
+    .letter { position: absolute; z-index: 3; left: 7%; top: 8%; width: 86%; height: 84%; background: #fffcf5; border: 1px solid #e7dace; border-radius: 3px; box-shadow: 0 2px 9px #77535512; transform-origin: center center; overflow: hidden; }
+    .letter::before { content: ""; position: absolute; inset: 12px; border: 1px solid #bc879423; pointer-events: none; }
+    .message { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: translateY(8px); }
+    .letter-mark { color: #cca2a7; font: italic 12px Georgia, serif; letter-spacing: .1em; margin-bottom: 25px; }
+    .message h2 { font-family: "STKaiti", "KaiTi", "Kaiti SC", serif; font-size: clamp(27px, 6vw, 34px); font-weight: 400; letter-spacing: .12em; margin: 0 0 17px; color: #a65e70; }
+    .emoticon { font-size: clamp(15px, 4vw, 20px); white-space: nowrap; margin: 0; color: #a66c7a; }
+    .heart { display: inline-block; color: #c97989; }
+    .letter-line { width: 26px; height: 1px; background: #dcbcc0; margin-top: 28px; }
+    .envelope-trigger { position: absolute; inset: 0; width: 100%; z-index: 10; border: none; background: transparent; cursor: pointer; border-radius: 5px; }
+    .hint { font-size: 12px; letter-spacing: .18em; margin-top: 42px; color: #ae8790; transition: opacity .35s; }
+    /* ????? .85s ? ?? .3s ? ?? .85s ? ?? .65s ? ??? */
+    .opening .flap { animation: flap-open calc(.85s * var(--speed)) ease-in-out forwards; }
+    @keyframes flap-open { 0% { transform: rotateX(0deg); z-index: 6; } 49% { z-index: 6; } 50%,100% { z-index: 1; } 100% { transform: rotateX(180deg); } }
+    .opening .seal { opacity: 0; }
+    .opening .letter { animation: lift calc(.85s * var(--speed)) calc(1.15s * var(--speed)) ease-in-out forwards, unfold calc(.65s * var(--speed)) calc(2s * var(--speed)) ease-in-out forwards; }
+    @keyframes lift { from { transform: translateY(0); } to { transform: translateY(-112%); } }
+    @keyframes unfold { from { transform: translateY(-112%) scale(1); height: 84%; z-index: 7; } to { transform: translateY(-65%) scale(1.04); height: 145%; z-index: 7; } }
+    .opening .message { animation: reveal calc(.5s * var(--speed)) calc(2.65s * var(--speed)) ease forwards; }
+    @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+    .opened .heart { animation: heartbeat 2.4s ease-in-out infinite; }
+    @keyframes heartbeat { 0%, 45%, 100% { transform: scale(1); } 12% { transform: scale(1.18); } 25% { transform: scale(1.03); } 34% { transform: scale(1.12); } }
+    .petals { position: absolute; inset: 0; pointer-events: none; z-index: -1; overflow: hidden; }
+    .petal { position: absolute; bottom: -30px; left: var(--x); color: #d69ca8; font-family: Georgia, serif; font-size: var(--size); opacity: 0; animation: drift var(--duration) var(--delay) linear infinite; }
+    @keyframes drift { 0% { opacity: 0; transform: translate(0, 0) rotate(-12deg); } 18%,75% { opacity: .32; } 100% { opacity: 0; transform: translate(25px, -95svh) rotate(18deg); } }
+    @media (max-width: 480px) { .page::before { inset: 13px; } .masthead { top: 36px; } .footer { bottom: 29px; } .login-card { width: 290px; } h1 { font-size: 30px; } }
+    @media (max-height: 620px) and (min-width: 600px) { .masthead { top: 20px; } .masthead span { display: none; } .screen { padding-top: 80px; padding-bottom: 60px; } .scene { width: 270px; margin-top: 100px; } .footer { bottom: 20px; } }
+    /* ???????????????????????? */
+    @media (prefers-reduced-motion: reduce) { :root { --speed: .15; } .floating, .opened .heart, .petal { animation: none; } .login, .letter-screen { transition-duration: .15s; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="masthead" aria-hidden="true"><span>?</span>A LITTLE LETTER FOR YOU</header>
+    <section class="screen login" id="login" aria-labelledby="title">
+      <form class="login-card" id="loginForm" novalidate>
+        <p class="eyebrow">Just between us</p>
+        <h1 id="title">????????</h1>
+        <p class="intro">????????????</p>
+        <div class="input-wrap" id="inputWrap">
+          <input id="password" type="password" inputmode="numeric" placeholder="???? ?" aria-label="????" aria-describedby="error" autocomplete="off">
+        </div>
+        <button class="open-button" type="submit">??</button>
+        <p class="error" id="error" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <section class="screen letter-screen" id="letterScreen" aria-label="??????" hidden>
+      <div class="scene">
+        <div class="envelope floating" id="envelope">
+          <div class="back"></div>
+          <article class="letter" id="letter" aria-hidden="true" tabindex="-1">
+            <div class="message">
+              <span class="letter-mark" aria-hidden="true">with all my love</span>
+              <!-- ???????????? -->
+              <h2>????</h2>
+              <p class="emoticon">???3????<span class="heart">?</span>?</p>
+              <span class="letter-line" aria-hidden="true"></span>
+            </div>
+          </article>
+          <div class="fold left"></div><div class="fold right"></div><div class="fold bottom"></div>
+          <div class="fold flap"></div><div class="seal" aria-hidden="true">?</div>
+          <button class="envelope-trigger" id="envelopeTrigger" aria-label="?????? ?" aria-describedby="hint"></button>
+        </div>
+      </div>
+      <p class="hint" id="hint">???? ?</p>
+    </section>
+    <div class="petals" id="petals" aria-hidden="true"></div>
+    <footer class="footer">???????????</footer>
+  </main>
+  <script>
+    // ????????????????????????????
+    const PASSWORD = '1089';
+    const $ = id => document.getElementById(id);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let stage = 'login';
+
+    $('loginForm').addEventListener('submit', event => {
+      event.preventDefault(); // ????????????
+      if (stage !== 'login') return;
+      if ($('password').value !== PASSWORD) {
+        $('error').textContent = '????????? ?';
+        $('password').setAttribute('aria-invalid', 'true');
+        $('inputWrap').classList.remove('shake');
+        void $('inputWrap').offsetWidth; // ??????????????
+        $('inputWrap').classList.add('shake');
+        $('password').focus();
+        $('password').select();
+        return;
+      }
+      stage = 'transition';
+      $('error').textContent = '';
+      $('password').removeAttribute('aria-invalid');
+      $('login').inert = true;
+      $('login').classList.add('leaving');
+      window.setTimeout(() => {
+        $('login').hidden = true;
+        $('letterScreen').hidden = false;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          $('letterScreen').classList.add('visible');
+          stage = 'envelope';
+          $('envelopeTrigger').focus({ preventScroll: true });
+        }));
+      }, reducedMotion.matches ? 160 : 620);
+    });
+
+    $('password').addEventListener('input', () => {
+      $('error').textContent = '';
+      $('password').removeAttribute('aria-invalid');
+    });
+
+    $('envelopeTrigger').addEventListener('click', () => {
+      if (stage !== 'envelope') return; // ???????????
+      stage = 'opening';
+      const envelope = $('envelope');
+      // ?????????????????????
+      envelope.style.transform = getComputedStyle(envelope).transform;
+      envelope.classList.remove('floating');
+      $('envelopeTrigger').hidden = true;
+      $('hint').style.opacity = '0';
+      envelope.classList.add('opening');
+    });
+
+    // ?????????????????? CSS ?????????
+    $('envelope').addEventListener('animationend', event => {
+      if (event.animationName !== 'reveal') return;
+      stage = 'opened';
+      $('envelope').classList.add('opened');
+      $('letter').removeAttribute('aria-hidden');
+      $('letter').focus({ preventScroll: true });
+      if (reducedMotion.matches) return;
+      // ?????????????????
+      [9, 23, 38, 67, 81, 92].forEach((x, i) => {
+        const heart = document.createElement('span');
+        heart.className = 'petal';
+        heart.textContent = i % 2 ? '?' : '?';
+        heart.style.cssText = `--x:${x}%;--size:${12 + i % 3 * 4}px;--duration:${12 + i % 3 * 2}s;--delay:${i * 1.4}s`;
+        $('petals').appendChild(heart);
+      });
+    });
+  </script>
+</body>
+</html>
