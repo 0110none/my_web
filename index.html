@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#faf3ef">
-  <title>?????? ?</title>
+  <title>给你的一封信 ♡</title>
   <style>
-    /* ????????--speed ???????????????? 2.9 ?? */
+    /* 修改这里的颜色；--speed 越大，开信动画越慢。默认总时长约 2.9 秒。 */
     :root { --cream: #faf6f0; --pink: #eed1d2; --rose: #b46c79; --ink: #76515a; --speed: 1; }
     * { box-sizing: border-box; }
     body { margin: 0; min-height: 100svh; color: var(--ink); background: var(--cream); font-family: "Microsoft YaHei", "PingFang SC", sans-serif; }
@@ -42,7 +42,7 @@
     .floating { animation: float 3.8s ease-in-out infinite; }
     @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
     .back { position: absolute; inset: 0; border-radius: 5px; background: #d9afb5; box-shadow: inset 0 1px 4px #94627020; }
-    /* ???????????????????????? */
+    /* 独立的左右折角、底折角与上盖，信纸位于折角后面。 */
     .fold { position: absolute; inset: 0; pointer-events: none; }
     .left { z-index: 4; background: linear-gradient(120deg, #efd3d4, #e5bdc3); clip-path: polygon(0 0, 53% 55%, 0 100%); }
     .right { z-index: 4; background: linear-gradient(240deg, #eed0d2, #e6bfc5); clip-path: polygon(100% 0, 47% 55%, 100% 100%); }
@@ -59,7 +59,7 @@
     .letter-line { width: 26px; height: 1px; background: #dcbcc0; margin-top: 28px; }
     .envelope-trigger { position: absolute; inset: 0; width: 100%; z-index: 10; border: none; background: transparent; cursor: pointer; border-radius: 5px; }
     .hint { font-size: 12px; letter-spacing: .18em; margin-top: 42px; color: #ae8790; transition: opacity .35s; }
-    /* ????? .85s ? ?? .3s ? ?? .85s ? ?? .65s ? ??? */
+    /* 顺序：翻盖 .85s → 停顿 .3s → 升纸 .85s → 展开 .65s → 文字。 */
     .opening .flap { animation: flap-open calc(.85s * var(--speed)) ease-in-out forwards; }
     @keyframes flap-open { 0% { transform: rotateX(0deg); z-index: 6; } 49% { z-index: 6; } 50%,100% { z-index: 1; } 100% { transform: rotateX(180deg); } }
     .opening .seal { opacity: 0; }
@@ -75,63 +75,63 @@
     @keyframes drift { 0% { opacity: 0; transform: translate(0, 0) rotate(-12deg); } 18%,75% { opacity: .32; } 100% { opacity: 0; transform: translate(25px, -95svh) rotate(18deg); } }
     @media (max-width: 480px) { .page::before { inset: 13px; } .masthead { top: 36px; } .footer { bottom: 29px; } .login-card { width: 290px; } h1 { font-size: 30px; } }
     @media (max-height: 620px) and (min-width: 600px) { .masthead { top: 20px; } .masthead span { display: none; } .screen { padding-top: 80px; padding-bottom: 60px; } .scene { width: 270px; margin-top: 100px; } .footer { bottom: 20px; } }
-    /* ???????????????????????? */
+    /* 尊重系统的减少动态效果设置，保留简短的开信顺序。 */
     @media (prefers-reduced-motion: reduce) { :root { --speed: .15; } .floating, .opened .heart, .petal { animation: none; } .login, .letter-screen { transition-duration: .15s; } }
   </style>
 </head>
 <body>
   <main class="page">
-    <header class="masthead" aria-hidden="true"><span>?</span>A LITTLE LETTER FOR YOU</header>
+    <header class="masthead" aria-hidden="true"><span>♡</span>A LITTLE LETTER FOR YOU</header>
     <section class="screen login" id="login" aria-labelledby="title">
       <form class="login-card" id="loginForm" novalidate>
         <p class="eyebrow">Just between us</p>
-        <h1 id="title">????????</h1>
-        <p class="intro">????????????</p>
+        <h1 id="title">有一封信，想给你</h1>
+        <p class="intro">一点点秘密，一整颗真心。</p>
         <div class="input-wrap" id="inputWrap">
-          <input id="password" type="password" inputmode="numeric" placeholder="???? ?" aria-label="????" aria-describedby="error" autocomplete="off">
+          <input id="password" type="password" inputmode="numeric" placeholder="输入密码 ♡" aria-label="输入密码" aria-describedby="error" autocomplete="off">
         </div>
-        <button class="open-button" type="submit">??</button>
+        <button class="open-button" type="submit">打开</button>
         <p class="error" id="error" role="status" aria-live="polite"></p>
       </form>
     </section>
-    <section class="screen letter-screen" id="letterScreen" aria-label="??????" hidden>
+    <section class="screen letter-screen" id="letterScreen" aria-label="给你的一封信" hidden>
       <div class="scene">
         <div class="envelope floating" id="envelope">
           <div class="back"></div>
           <article class="letter" id="letter" aria-hidden="true" tabindex="-1">
             <div class="message">
               <span class="letter-mark" aria-hidden="true">with all my love</span>
-              <!-- ???????????? -->
-              <h2>????</h2>
-              <p class="emoticon">???3????<span class="heart">?</span>?</p>
+              <!-- 在这里修改信纸上的文字。 -->
+              <h2>爱你宝宝</h2>
+              <p class="emoticon">（づ￣3￣）づ╭<span class="heart">❤</span>～</p>
               <span class="letter-line" aria-hidden="true"></span>
             </div>
           </article>
           <div class="fold left"></div><div class="fold right"></div><div class="fold bottom"></div>
-          <div class="fold flap"></div><div class="seal" aria-hidden="true">?</div>
-          <button class="envelope-trigger" id="envelopeTrigger" aria-label="?????? ?" aria-describedby="hint"></button>
+          <div class="fold flap"></div><div class="seal" aria-hidden="true">♡</div>
+          <button class="envelope-trigger" id="envelopeTrigger" aria-label="点击打开信封 ♡" aria-describedby="hint"></button>
         </div>
       </div>
-      <p class="hint" id="hint">???? ?</p>
+      <p class="hint" id="hint">点击打开 ♡</p>
     </section>
     <div class="petals" id="petals" aria-hidden="true"></div>
-    <footer class="footer">???????????</footer>
+    <footer class="footer">把喜欢，悄悄写进信里。</footer>
   </main>
   <script>
-    // ????????????????????????????
+    // 修改密码：这是纯前端的浪漫小互动，密码会存在页面源码中。
     const PASSWORD = '1089';
     const $ = id => document.getElementById(id);
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let stage = 'login';
 
     $('loginForm').addEventListener('submit', event => {
-      event.preventDefault(); // ????????????
+      event.preventDefault(); // 错误或正确都不刷新页面。
       if (stage !== 'login') return;
       if ($('password').value !== PASSWORD) {
-        $('error').textContent = '????????? ?';
+        $('error').textContent = '密码不对哦，再想想 ♡';
         $('password').setAttribute('aria-invalid', 'true');
         $('inputWrap').classList.remove('shake');
-        void $('inputWrap').offsetWidth; // ??????????????
+        void $('inputWrap').offsetWidth; // 重新触发抖动，支持连续输错。
         $('inputWrap').classList.add('shake');
         $('password').focus();
         $('password').select();
@@ -159,10 +159,10 @@
     });
 
     $('envelopeTrigger').addEventListener('click', () => {
-      if (stage !== 'envelope') return; // ???????????
+      if (stage !== 'envelope') return; // 防止重复点击打断动画。
       stage = 'opening';
       const envelope = $('envelope');
-      // ?????????????????????
+      // 固定当前漂浮位置，停止漂浮时不会突然跳动。
       envelope.style.transform = getComputedStyle(envelope).transform;
       envelope.classList.remove('floating');
       $('envelopeTrigger').hidden = true;
@@ -170,7 +170,7 @@
       envelope.classList.add('opening');
     });
 
-    // ?????????????????? CSS ?????????
+    // 用动画完成事件衔接内容与装饰，让修改 CSS 速度后仍保持同步。
     $('envelope').addEventListener('animationend', event => {
       if (event.animationName !== 'reveal') return;
       stage = 'opened';
@@ -178,11 +178,11 @@
       $('letter').removeAttribute('aria-hidden');
       $('letter').focus({ preventScroll: true });
       if (reducedMotion.matches) return;
-      // ?????????????????
+      // 固定六颗小爱心，避免不断新增元素。
       [9, 23, 38, 67, 81, 92].forEach((x, i) => {
         const heart = document.createElement('span');
         heart.className = 'petal';
-        heart.textContent = i % 2 ? '?' : '?';
+        heart.textContent = i % 2 ? '♡' : '♥';
         heart.style.cssText = `--x:${x}%;--size:${12 + i % 3 * 4}px;--duration:${12 + i % 3 * 2}s;--delay:${i * 1.4}s`;
         $('petals').appendChild(heart);
       });
